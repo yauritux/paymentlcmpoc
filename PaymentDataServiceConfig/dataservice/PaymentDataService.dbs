@@ -1,0 +1,32 @@
+<data name="PaymentDataService" serviceNamespace="" serviceGroup="PaymentService" transports="http https local">
+  <description>Payment Data Service</description>
+  <config id="PaymentDS">
+    <property name="driverClassName">com.mysql.jdbc.Driver</property>
+    <property name="url">jdbc:mysql://localhost:3306/lcm_poc_v1</property>
+    <property name="username">root</property>
+    <property name="password">v3r44pr1</property>
+  </config>
+  <query id="GetMerchantServiceConfig" useConfig="PaymentDS">
+    <sql>select id,merchant_id,merchant_name,service_id,service_name,service_endpoint,product_type,instrument_type,countries from merchant_service_configs where id=:id</sql>
+    <param name="id" paramType="SCALAR" sqlType="STRING" />
+    <result outputType="json">{
+  "ServiceConfiguration": {
+    "id": "$id",
+    "merchantId": "$merchant_id",
+    "merchantName": "$merchant_name",
+    "serviceId": "$service_id",
+    "serviceName": "$service_name",
+    "serviceEndpoint": "$service_endpoint",
+    "productType": "$product_type",
+    "instrumentType": "$instrument_type",
+    "countries": "$countries"
+  }
+}</result>
+  </query>
+  <resource method="GET" path="/merchants/serviceconfigs/{id}">
+    <description>Get Merchant Service Configuration</description>
+    <call-query href="GetMerchantServiceConfig">
+      <with-param name="id" query-param="id" />
+    </call-query>
+  </resource>
+</data>

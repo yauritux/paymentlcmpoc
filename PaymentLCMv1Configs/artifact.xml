@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><artifacts>
+    <artifact name="GetMerchantServiceConfig" groupId="com.pdd.endpoint" version="1.0.0" type="synapse/endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/endpoints/GetMerchantServiceConfig.xml</file>
+    </artifact>
+    <artifact name="PaymentLCM" groupId="com.pdd.api" version="1.0.0" type="synapse/api" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/api/PaymentLCM.xml</file>
+    </artifact>
+    <artifact name="PaymentLCM_swagger" groupId="com.pdd.metadata" version="1.0.0" type="synapse/metadata" serverRole="EnterpriseServiceBus">
+        <file>src/main/resources/metadata/PaymentLCM_swagger.yaml</file>
+    </artifact>
+    <artifact name="PaymentLCM_metadata" groupId="com.pdd.metadata" version="1.0.0" type="synapse/metadata" serverRole="EnterpriseServiceBus">
+        <file>src/main/resources/metadata/PaymentLCM_metadata.yaml</file>
+    </artifact>
+</artifacts>

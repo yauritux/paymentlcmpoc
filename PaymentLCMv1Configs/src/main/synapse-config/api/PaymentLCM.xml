@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/payments" name="PaymentLCM" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="GET" uri-template="/submit/{id}">
+        <inSequence>
+            <call>
+                <endpoint key="GetMerchantServiceConfig"/>
+            </call>
+            <property description="Next Service Endpoint" expression="json-eval($.ServiceConfiguration.serviceEndpoint)" name="uri.var.ServiceEndpoint" scope="default" type="STRING"/>
+            <log description="Calling next Route" level="custom">
+                <property expression="fn:concat('Calling next endpoint ', get-property('uri.var.ServiceEndpoint'))" name="message"/>
+            </log>
+            <call>
+                <endpoint>
+                    <http method="get" uri-template="{uri.var.ServiceEndpoint}">
+                        <suspendOnFailure>
+                            <initialDuration>-1</initialDuration>
+                            <progressionFactor>-1</progressionFactor>
+                            <maximumDuration>0</maximumDuration>
+                        </suspendOnFailure>
+                        <markForSuspension>
+                            <retriesBeforeSuspension>0</retriesBeforeSuspension>
+                        </markForSuspension>
+                    </http>
+                </endpoint>
+            </call>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </resource>
+</api>
